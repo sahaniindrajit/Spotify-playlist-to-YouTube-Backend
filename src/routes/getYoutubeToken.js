@@ -18,7 +18,8 @@ const oauth2Client = new google.auth.OAuth2(
 );
 
 // Define the YouTube OAuth scope
-const SCOPES = ['https://www.googleapis.com/auth/youtube.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/youtube',
+  'https://www.googleapis.com/auth/youtube.force-ssl',];
 
 // Step 1: Redirect to Google's OAuth 2.0 server
 route.get('/auth', (req, res) => {
