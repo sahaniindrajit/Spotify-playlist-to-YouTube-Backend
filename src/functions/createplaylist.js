@@ -13,7 +13,7 @@ async function createPlaylist(auth) {
       },
     },
   });
-
+  console.log("playlist created");
   return response.data.id;
 }
 
