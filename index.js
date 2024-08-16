@@ -2,7 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors';
 import morgan from 'morgan';
-import router from './routes/route.js';
+import router from './src/routes/route.js';
 
 const port = process.env.PORT || 3000
 const app = express()

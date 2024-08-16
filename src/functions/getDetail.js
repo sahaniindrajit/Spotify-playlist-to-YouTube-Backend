@@ -1,5 +1,8 @@
 import axios from "axios"
 async function getSongDetail(data, response) {
+    if (!data) {
+        throw new Error('Invalid data: data is undefined or null');
+    }
     const playlistId = data.split('/playlist/')[1];
 
     const songsData = await axios.get(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
