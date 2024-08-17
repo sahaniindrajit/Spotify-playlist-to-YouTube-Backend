@@ -9,11 +9,11 @@ async function createPlaylist(auth) {
         description: "spotify playlist songs in one place",
       },
       status: {
-        privacyStatus: 'private',
+        privacyStatus: 'public',
       },
     },
   });
-  console.log("playlist created");
+
   return response.data.id;
 }
 

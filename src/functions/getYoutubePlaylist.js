@@ -16,7 +16,7 @@ async function getYoutubePlaylist(detail, auth) {
 
             try {
                 await searchVideoAndAddVideo(auth, query, playlistId);
-                console.log(`Successfully added: ${query} to the playlist`);
+
             }
             catch (error) {
                 console.error('Error during API call:', error);
