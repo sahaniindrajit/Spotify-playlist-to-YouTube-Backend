@@ -12,7 +12,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "appwrite": "^15.0.0",
     "axios": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -20,8 +19,7 @@
     "express": "^4.19.2",
     "googleapis": "^140.0.1",
     "morgan": "^1.10.0",
-    "nodemon": "^3.1.4",
-    "p-limit": "^6.1.0"
+    "nodemon": "^3.1.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

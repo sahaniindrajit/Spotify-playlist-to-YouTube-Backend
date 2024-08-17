@@ -20,7 +20,7 @@ route.use('/google', googleRoute)
 route.post('/playlist', async (req, res) => {
 
     //for generating youtube access token
-    const accessToken = req.headers['youtube_access_token'];
+    const accessToken = req.cookies.youtube_access_token || req.headers['youtube_access_token']; //for acessing the token through backend postman
 
     if (!accessToken) {
         return res.status(401).send('No access token found.');
