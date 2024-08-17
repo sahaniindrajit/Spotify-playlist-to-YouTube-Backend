@@ -14,14 +14,13 @@ const oauth2Client = new google.auth.OAuth2(
 );
 
 const route = Router()
-route.use('/google', googleRoute)
 route.use(cookieParser());
+route.use('/google', googleRoute)
 
-
-route.get('/playlist', async (req, res) => {
+route.post('/playlist', async (req, res) => {
 
     //for generating youtube access token
-    const accessToken = req.cookies.youtube_access_token;
+    const accessToken = req.headers['youtube_access_token'];
 
     if (!accessToken) {
         return res.status(401).send('No access token found.');

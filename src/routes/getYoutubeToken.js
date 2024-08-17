@@ -38,7 +38,7 @@ route.get('/oauth2callback', async (req, res) => {
     oauth2Client.setCredentials(tokens);
 
     // Store the access token in a cookie
-    res.cookie('youtube_access_token', tokens.access_token, { httpOnly: true });
+    res.cookie('youtube_access_token', tokens.access_token);
 
     res.redirect('http://localhost:5173/playlist');
   } catch (error) {
