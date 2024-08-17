@@ -10,7 +10,10 @@ const app = express()
 dotenv.config()
 app.use(express.json());
 app.use(morgan('tiny'))
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:5173', // Allow frontend
+    credentials: true, // Allow cookies to be sent with requests
+}));
 app.use('/user', router)
 
 

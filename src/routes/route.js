@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser'
 import { google } from 'googleapis'
 import getYoutubePlaylist from '../functions/getYoutubePlaylist.js'
 
+//for setting google oauth2  
 const oauth2Client = new google.auth.OAuth2(
     process.env.YOUTUBECLIENTID,    // Replace with your client ID
     process.env.YOUTUBECLIENTSECRET, // Replace with your client secret
@@ -19,6 +20,7 @@ route.use(cookieParser());
 
 route.get('/playlist', async (req, res) => {
 
+    //for generating youtube access token
     const accessToken = req.cookies.youtube_access_token;
 
     if (!accessToken) {
@@ -29,7 +31,7 @@ route.get('/playlist', async (req, res) => {
         access_token: accessToken,
     });
 
-
+    //for getting playlist url
     const data = req.body.data
     if (!data || !data.includes('playlist')) {
         return res.json({
@@ -37,6 +39,7 @@ route.get('/playlist', async (req, res) => {
         })
     }
 
+    //for generating spotify api token
     const response = await getToken()
     if (!response) {
         return res.json({
@@ -44,8 +47,10 @@ route.get('/playlist', async (req, res) => {
         })
     }
 
+    //for getting all the songs from spotify playlist
     const detail = await getDetail(data, response)
 
+    //for creating and adding song to user's youtube playlist
     const success = await getYoutubePlaylist(detail, oauth2Client)
 
     if (success == false) {

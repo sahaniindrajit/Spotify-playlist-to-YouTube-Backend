@@ -40,7 +40,7 @@ route.get('/oauth2callback', async (req, res) => {
     // Store the access token in a cookie
     res.cookie('youtube_access_token', tokens.access_token, { httpOnly: true });
 
-    res.send('YouTube access token stored in cookies!');
+    res.redirect('http://localhost:5173/playlist');
   } catch (error) {
     console.error('Error retrieving access token', error);
     res.send('Error retrieving access token');
