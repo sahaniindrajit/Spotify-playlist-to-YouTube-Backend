@@ -38,7 +38,11 @@ route.get('/oauth2callback', async (req, res) => {
     oauth2Client.setCredentials(tokens);
 
     // Store the access token in a cookie
-    res.cookie('youtube_access_token', tokens.access_token);
+    res.cookie('youtube_access_token', tokens.access_token, {
+      path: '/',
+      sameSite: 'None',
+      secure: true
+    });
 
     res.redirect('https://spotify-playlist-to-youtube-frontend.onrender.com/playlist');
   } catch (error) {
