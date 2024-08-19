@@ -10,7 +10,7 @@ route.use(cookieParser());
 // Replace with your Google OAuth credentials
 const CLIENT_ID = process.env.YOUTUBECLIENTID;
 const CLIENT_SECRET = process.env.YOUTUBECLIENTSECRET
-const REDIRECT_URI = 'http://localhost:3000/user/google/oauth2callback';
+const REDIRECT_URI = 'https://spotify-playlist-to-youtube-backend.onrender.com/user/google/oauth2callback';
 const oauth2Client = new google.auth.OAuth2(
   CLIENT_ID,
   CLIENT_SECRET,
@@ -40,7 +40,7 @@ route.get('/oauth2callback', async (req, res) => {
     // Store the access token in a cookie
     res.cookie('youtube_access_token', tokens.access_token);
 
-    res.redirect('http://localhost:5173/playlist');
+    res.redirect('https://spotify-playlist-to-youtube-frontend.onrender.com/playlist');
   } catch (error) {
     console.error('Error retrieving access token', error);
     res.send('Error retrieving access token');

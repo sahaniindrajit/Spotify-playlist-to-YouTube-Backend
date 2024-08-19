@@ -10,7 +10,7 @@ import getYoutubePlaylist from '../functions/getYoutubePlaylist.js'
 const oauth2Client = new google.auth.OAuth2(
     process.env.YOUTUBECLIENTID,    // Replace with your client ID
     process.env.YOUTUBECLIENTSECRET, // Replace with your client secret
-    'http://localhost:3000/user/google/oauth2callback' // Replace with your redirect URI
+    'https://spotify-playlist-to-youtube-backend.onrender.com/user/google/oauth2callback' // Replace with your redirect URI
 );
 
 const route = Router()

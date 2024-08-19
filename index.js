@@ -11,7 +11,7 @@ dotenv.config()
 app.use(express.json());
 app.use(morgan('tiny'))
 app.use(cors({
-    origin: 'http://localhost:5173', // Allow frontend
+    origin: 'https://spotify-playlist-to-youtube-frontend.onrender.com', // Allow frontend
     credentials: true, // Allow cookies to be sent with requests
 }));
 app.use('/user', router)
