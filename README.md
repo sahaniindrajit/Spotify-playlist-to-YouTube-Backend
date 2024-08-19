@@ -1,7 +1,8 @@
 
 # Spotify Playlist to YouTube Backend
 
-Welcome to the **Spotify Playlist to YouTube Backend**! This repository contains a backend service designed to convert Spotify playlists into YouTube Playlist in user's Google Account.[CheckOut Website](https://spotify-playlist-to-youtube-frontend.onrender.com)
+Welcome to the **Spotify Playlist to YouTube Backend**! This repository contains a backend service designed to convert Spotify playlists into YouTube Playlist in user's Google Account.[CheckOut the blog to better understand the project](https://sahaniindrajit.hashnode.dev/import-spotify-playlist-to-youtube-account-with-nodejs)
+
 [Checkout Frontend source code](https://github.com/sahaniindrajit/Spotify-playlist-to-YouTube-Frontend)
 
 
