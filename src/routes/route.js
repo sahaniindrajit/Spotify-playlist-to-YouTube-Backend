@@ -18,49 +18,56 @@ route.use(cookieParser());
 route.use('/google', googleRoute)
 
 route.post('/playlist', async (req, res) => {
+    try {
+        //for generating youtube access token
+        const accessToken = req.cookies.youtube_access_token; //for acessing the token through backend postman
 
-    //for generating youtube access token
-    const accessToken = req.headers.youtube_access_token; //for acessing the token through backend postman
+        if (!accessToken) {
+            return res.status(401).send('No access token found.');
+        }
 
-    if (!accessToken) {
-        return res.status(401).send('No access token found.');
-    }
+        oauth2Client.setCredentials({
+            access_token: accessToken,
+        });
 
-    oauth2Client.setCredentials({
-        access_token: accessToken,
-    });
+        //for getting playlist url
+        const data = req.body.data
+        if (!data || !data.includes('playlist')) {
+            return res.json({
+                msg: "invalid link!! Please only give the link of a playlist"
+            })
+        }
 
-    //for getting playlist url
-    const data = req.body.data
-    if (!data || !data.includes('playlist')) {
+        //for generating spotify api token
+        const response = await getToken()
+        if (!response) {
+            return res.json({
+                msg: "Failed to obtain spotify token"
+            })
+        }
+
+        //for getting all the songs from spotify playlist
+        const detail = await getDetail(data, response)
+
+        //for creating and adding song to user's youtube playlist
+        const success = await getYoutubePlaylist(detail, oauth2Client)
+
+        if (success == false) {
+            return res.json({
+                msg: "Developer api Queries quota all used. Try again next day"
+            })
+        }
         return res.json({
-            msg: "invalid link!! Please only give the link of a playlist"
+            msg: "playlist added",
+            link: `https://www.youtube.com/playlist?list=${success}`
         })
     }
-
-    //for generating spotify api token
-    const response = await getToken()
-    if (!response) {
-        return res.json({
-            msg: "Failed to obtain spotify token"
-        })
+    catch (error) {
+        console.error('Error in /playlist route:', error);
+        return res.status(500).json({ msg: 'Internal server error' });
     }
 
-    //for getting all the songs from spotify playlist
-    const detail = await getDetail(data, response)
 
-    //for creating and adding song to user's youtube playlist
-    const success = await getYoutubePlaylist(detail, oauth2Client)
-
-    if (success == false) {
-        return res.json({
-            msg: "Developer api Queries quota all used. Try again next day"
-        })
-    }
-    return res.json({
-        msg: "playlist added",
-        link: `https://www.youtube.com/playlist?list=${success}`
-    })
 
 })
 
